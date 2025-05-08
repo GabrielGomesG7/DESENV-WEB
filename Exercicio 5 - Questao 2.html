@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Boletim Escolar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #006400;
+      text-align: center;
+    }
+    
+    #mostrar {
+      background: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      display: block;
+      margin: 20px auto;
+      font-size: 16px;
+    }
+    
+    #tabela {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      display: none;
+    }
+    
+    #tabela, #tabela th, #tabela td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    #tabela th {
+      background-color: #f2f2f2;
+    }
+    
+    .verde {
+      color: green;
+      font-weight: bold;
+    }
+    
+    .vermelho {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Notas da Turma</h1>
+  
+  <button id="mostrar" onclick="montarTabela()">Mostrar Notas</button>
+  
+  <table id="tabela">
+    <thead>
+      <tr>
+        <th>Nome do Aluno</th>
+        <th>Nota</th>
+        <th>Resultado</th>
+      </tr>
+    </thead>
+    <tbody id="corpo-tabela"></tbody>
+  </table>
+
+  <script>
+    var alunos = [
+      { nome: "Mariana Silva", nota: 8.5 },
+      { nome: "Carlos Henrique", nota: 4.7 },
+      { nome: "Fernanda Souza", nota: 6.0 },
+      { nome: "João Pedro", nota: 2.8 },
+      { nome: "Luana Oliveira", nota: 9.2 },
+      { nome: "Bruno Costa", nota: 5.9 }
+    ];
+
+    function montarTabela() {
+      var corpo = document.getElementById("corpo-tabela");
+      var tabela = document.getElementById("tabela");
+      
+      // Limpa a tabela antes de preencher
+      corpo.innerHTML = "";
+      
+      // Mostra a tabela que estava escondida
+      tabela.style.display = "table";
+      
+      // Para cada aluno...
+      for(var i = 0; i < alunos.length; i++) {
+        var aluno = alunos[i];
+        
+        // Cria uma nova linha
+        var linha = "<tr>";
+        linha += "<td>" + aluno.nome + "</td>";
+        linha += "<td>" + aluno.nota.toFixed(1) + "</td>";
+        
+        // Verifica se passou
+        if(aluno.nota >= 6) {
+          linha += '<td class="verde">Aprovado</td>';
+        } else {
+          linha += '<td class="vermelho">Reprovado</td>';
+        }
+        
+        linha += "</tr>";
+        
+        // Adiciona a linha ao corpo da tabela
+        corpo.innerHTML += linha;
+      }
+      
+      // Desativa o botão depois de usar
+      document.getElementById("mostrar").disabled = true;
+    }
+  </script>
+
+</body>
+</html>
